@@ -1,0 +1,7 @@
+Menu
+1. Display the library
+2. Add a book
+3. Remove a book
+4. Sort the library
+5. Save changes
+0. Exit
