@@ -10,12 +10,18 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class gestioneFile {
+public class fileManagement {
     
     private static String pathFile =  "src\\fileManagement\\biblioteca.csv";
     private static File f = new File(pathFile);
 
-    public static Vector<Book> inizializza(Vector<Book> elenco) {
+    /**
+     * Loads the books in the file "biblioteca.csv" into a Vector 
+     * 
+     * @return the Vector of books
+     **/
+    public static Vector<Book> initialize() {
+        Vector<Book> list = new Vector<Book>(10, 2);
         Scanner inputFile = null;
         if(f.exists() && f.isFile()) {
             try {
@@ -23,23 +29,28 @@ public class gestioneFile {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-        } else return elenco;
+        } else return list;
 
         while(inputFile.hasNextLine()){
             String temp = inputFile.nextLine();
             String[] record = temp.split(",");
             if(record.length == 4) {
-                String ISBN = record[0];
-                String title = record[1];
-                String author = record[2];
+                String ISBN = record[0].trim();
+                String title = record[1].trim();
+                String author = record[2].trim();
                 double cost = Double.parseDouble(record[3]);
-                elenco.add(new Book(ISBN, title, author, cost));
+                list.add(new Book(ISBN, title, author, cost));
             }
         }
         inputFile.close();
-        return elenco;
+        return list;
     }
 
+    /**
+     * Updates the file with the changes in the list
+     * 
+     * @param list Vector of Books
+     */
     public static void writeOnFile(Vector<Book> list) {
         FileWriter out = null;
         try {

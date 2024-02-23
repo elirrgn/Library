@@ -3,14 +3,13 @@ package biblioteca;
 import java.util.Collections;
 import java.util.Vector;
 
-import fileManagement.gestioneFile;
+import fileManagement.fileManagement;
 
 public class Library {
 	private Vector<Book> b;
 	
 	public Library() {
-		b = new Vector<Book>(10, 2);
-		gestioneFile.inizializza(b);
+		b = fileManagement.initialize();
 	}
 
 
@@ -63,7 +62,7 @@ public class Library {
 	 * 
 	 */
 	public void updateFile() {
-		gestioneFile.writeOnFile(b);
+		fileManagement.writeOnFile(b);
 	}
 
 	/**
